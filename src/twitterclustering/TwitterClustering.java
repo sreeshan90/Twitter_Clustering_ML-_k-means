@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+=======
+package twitterclustering;
+>>>>>>> origin/master
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,6 +43,7 @@ import org.json.simple.parser.JSONParser;
  */
 public class TwitterClustering {
 
+<<<<<<< HEAD
 	/**
 	 * @param args
 	 *            the command line arguments
@@ -58,6 +63,21 @@ public class TwitterClustering {
 		}
 		return tmp;
 	}
+=======
+    public static float jaccardDistance(Set<String> a, Set<String> b) {
+
+        if (a.size() == 0 || b.size() == 0) {
+            return 0;
+        }
+
+        Set<String> unionXY = new HashSet<String>(a);
+        unionXY.addAll(b);
+
+        Set<String> intersectionXY = new HashSet<String>(a);
+        intersectionXY.retainAll(b);
+        float retValue = (float) intersectionXY.size() / (float) unionXY.size();
+        return retValue;
+>>>>>>> origin/master
 
 	public static float jaccardDistance(Set<String> a, Set<String> b) {
 
@@ -134,7 +154,14 @@ public class TwitterClustering {
 				i++;
 			}
 
+<<<<<<< HEAD
 			Iterator it = tweets.entrySet().iterator();
+=======
+                    for (Cluster clust : clusterSet) {
+
+                        distMap.put(clust, jaccardDistance(p.getText(), clust.getCentroid().getText()));
+                    }
+>>>>>>> origin/master
 
 			for (int l = 0; l < 2; l++) { // limit to 25 iterations
 
@@ -152,7 +179,18 @@ public class TwitterClustering {
 
 					HashMap<Cluster, Float> sorted = (HashMap<Cluster, Float>) sortByValue(distMap);
 
+<<<<<<< HEAD
 					sorted.keySet().iterator().next().getMembers().add(p);
+=======
+                        avgSumDist += clust.getMembers().get(j).getAttributeValue();
+                        tDistMap.put(clust.getMembers().get(j).getTweetID(), clust.getMembers().get(j).getAttributeValue());
+                    }
+                    if (clust.getMembers().size() != 0) {
+                        avgSumDist /= (clust.getMembers().size());
+                    }
+
+                    ArrayList<Long> listValues = new ArrayList<Long>(tDistMap.values());
+>>>>>>> origin/master
 
 				}
 
@@ -173,7 +211,19 @@ public class TwitterClustering {
 						avgSumDist /= (clust.getMembers().size());
 					}
 
+<<<<<<< HEAD
 					ArrayList<Long> listValues = new ArrayList<Long>(tDistMap.values());
+=======
+                System.out.print(c.getId() + "\t");
+                
+                for(Tweet t : c.getMembers()){
+                  //  System.out.print(t.getTweetID()+ ",");
+                      System.out.println("\t"+t.getTweetID()+ "\t"+t.getText().toString());
+                }
+                         System.out.println("");         
+            }
+             System.out.println("");
+>>>>>>> origin/master
 
 					if (tDistMap.containsValue(findClosestNumber(listValues, avgSumDist))) {
 						// found closest
